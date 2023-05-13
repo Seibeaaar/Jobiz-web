@@ -8,4 +8,6 @@ export default {
   danger: "#F1416C",
   warning: "#F89C47",
   purple: "#7239EA",
+  greySecondary: "#F5F8FA",
+  lightBlue: "#F1FAFF",
 };

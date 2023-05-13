@@ -1,17 +1,13 @@
 import React from "react";
-import styled, { ThemeProvider } from "styled-components";
+import { ThemeProvider } from "styled-components";
 import theme from "./ui/theme";
-import { useTranslation } from "react-i18next";
-const Container = styled.div`
-  background-color: ${(props) => props.theme.colors.primary};
-`;
+import { RouterProvider } from "react-router-dom";
+import router from "./router";
 
 const App = () => {
-  const { t, ready } = useTranslation();
-  console.log(ready);
   return (
     <ThemeProvider theme={theme}>
-      <Container>{t("auth.login.title")}</Container>
+      <RouterProvider router={router} />
     </ThemeProvider>
   );
 };

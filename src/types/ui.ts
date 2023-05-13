@@ -10,4 +10,6 @@ export type Color =
   | "white"
   | "lightGrey"
   | "warning"
-  | "purple";
+  | "purple"
+  | "greySecondary"
+  | "lightBlue";
