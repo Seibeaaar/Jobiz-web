@@ -54,7 +54,7 @@ const SignUp = () => {
             {t("auth.signUp.title")}
           </Typography>
           <AuthRedirect
-            to="/"
+            to="/login"
             question={t("auth.signUp.question")}
             linkLabel={t("auth.signUp.redirect")}
           />

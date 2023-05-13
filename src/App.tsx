@@ -1,5 +1,6 @@
 import React from "react";
 import { ThemeProvider } from "styled-components";
+import { auth } from "./firebase/index";
 import theme from "./ui/theme";
 import { RouterProvider } from "react-router-dom";
 import router from "./router";
