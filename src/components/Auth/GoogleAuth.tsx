@@ -26,6 +26,10 @@ const GoogleButton = styled.button`
     opacity: 0.8;
     transition-duration: 0.3s;
   }
+  @media (max-width: 576px) {
+    width: 100%;
+    justify-content: center;
+  }
 `;
 
 const GoogleAuth: React.FC<IGoogleAuthProps> = ({ mode }) => {

@@ -46,6 +46,12 @@ export default {
       title: "Welcome to Jobiz",
       info: "Find your perfect match for job",
     },
+    forgotPassword: {
+      title: "Restore your password",
+      header: "Enter your email",
+      info: "so we can send you a restoration link",
+      submit: "Send a reset link",
+    },
   },
   general: {
     with: "with",

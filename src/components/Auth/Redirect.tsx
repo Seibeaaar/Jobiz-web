@@ -14,11 +14,19 @@ const RedirectRow = styled.div`
   align-items: center;
   margin-top: 8px;
   margin-bottom: 32px;
+  flex-wrap: wrap;
+  /* @media (max-width: 576px) {
+    flex-direction: column;
+    margin-top: 16px;
+  }  */
 `;
 
 const RedirectLink = styled(Link)`
   text-decoration: none;
   margin-left: 4px;
+  /* @media (max-width: 576px) {
+    margin-left: 0;
+  } */
 `;
 
 const AuthRedirect: React.FC<IRedirectProps> = ({

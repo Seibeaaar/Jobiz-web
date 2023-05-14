@@ -32,3 +32,10 @@ export const SignUpSchema = yup.object({
     .required("auth.inputs.lastName.required")
     .matches(nameRegex, "auth.inputs.lastName.error"),
 });
+
+export const ForgotPasswordSchema = yup.object({
+  email: yup
+    .string()
+    .required("auth.inputs.email.required")
+    .email("auth.inputs.email.error"),
+});

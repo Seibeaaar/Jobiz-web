@@ -4,9 +4,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import Typography from "src/components/UI/Typography";
 import AuthThumbnail from "src/components/UI/AuthThumbnail";
 import GoogleAuth from "src/components/Auth/GoogleAuth";
-import Button from "src/components/UI/Button";
 import { SignUpSchema } from "src/schemas/auth";
-import { displayErrorMessage, checkSubmitDisabled } from "src/utils/validation";
+import { displayErrorMessage } from "src/utils/validation";
 import {
   Container,
   FormContainer,
@@ -15,14 +14,23 @@ import {
   Label,
   LoginInput,
   ControlsRow,
+  Submit,
 } from "./SignUp.styled";
 import { useTranslation } from "react-i18next";
 import AuthRedirect from "src/components/Auth/Redirect";
 
+interface SignUpFormData {
+  email: string;
+  password: string;
+  firstName: string;
+  lastName: string;
+}
+
 const SignUp = () => {
   const {
     control,
-    formState: { errors, dirtyFields },
+    formState: { errors },
+    handleSubmit,
   } = useForm({
     resolver: yupResolver(SignUpSchema),
     defaultValues: {
@@ -31,19 +39,14 @@ const SignUp = () => {
       firstName: "",
       lastName: "",
     },
-    mode: "all",
+    mode: "onSubmit",
   });
   const { t } = useTranslation();
   const [showPassword, setShowPassword] = useState<boolean>(false);
 
   const togglePassword = () => setShowPassword(!showPassword);
 
-  const submitDisabled = checkSubmitDisabled(errors, dirtyFields, [
-    "email",
-    "password",
-    "firstName",
-    "lastName",
-  ]);
+  const onSubmit = (data: SignUpFormData) => console.log(data);
 
   return (
     <Container>
@@ -141,15 +144,11 @@ const SignUp = () => {
             </Label>
           </LoginForm>
           <ControlsRow>
-            <Button disabled={submitDisabled}>
-              <Typography
-                size="m"
-                weight="700"
-                color={submitDisabled ? "lightGrey" : "white"}
-              >
+            <Submit onClick={handleSubmit(onSubmit)}>
+              <Typography size="m" weight="700" color="white">
                 {t("auth.signUp.submit")}
               </Typography>
-            </Button>
+            </Submit>
             <GoogleAuth mode="signUp" />
           </ControlsRow>
         </FormContainer>

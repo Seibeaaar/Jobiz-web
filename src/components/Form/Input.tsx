@@ -39,20 +39,26 @@ const StyledInput = styled.input<IInputprops>`
   margin-bottom: ${(props) => (props.errorMessage ? 5 : 0)}px;
 `;
 
-const Input: React.FC<IInputprops> = (props) => (
-  <InputWrapper>
-    <StyledInput {...props} />
-    {props.errorMessage ? (
-      <Typography color="danger" size="xs">
-        {props.errorMessage}
-      </Typography>
-    ) : null}
-    {props.secure ? (
-      <PasswordIcon onClick={props.onSecurePress}>
-        {props.type === "password" ? <EyeOutlined /> : <EyeInvisibleOutlined />}
-      </PasswordIcon>
-    ) : null}
-  </InputWrapper>
-);
+const Input: React.FC<IInputprops> = (props) => {
+  return (
+    <InputWrapper>
+      <StyledInput {...props} />
+      {props.errorMessage ? (
+        <Typography color="danger" size="xs">
+          {props.errorMessage}
+        </Typography>
+      ) : null}
+      {props.secure ? (
+        <PasswordIcon onClick={props.onSecurePress}>
+          {props.type === "password" ? (
+            <EyeOutlined />
+          ) : (
+            <EyeInvisibleOutlined />
+          )}
+        </PasswordIcon>
+      ) : null}
+    </InputWrapper>
+  );
+};
 
 export default Input;

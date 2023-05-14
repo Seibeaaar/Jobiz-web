@@ -13,6 +13,9 @@ const Background = styled.div`
   height: 100%;
   justify-content: flex-end;
   width: 40%;
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 
 const StyledLogo = styled.img`
@@ -29,11 +32,11 @@ const Info = styled(Typography)`
 `;
 
 const Thumbnail = styled.img`
-    display: flex;
-    max-width: 500px;
-    max-height: 500px;
-    flex-grow: 1
-    margin-top: 15px;
+  display: flex;
+  max-width: 500px;
+  max-height: 500px;
+  margin-top: 15px;
+  width: 40vw;
 `;
 
 const AuthThumbnail = () => {

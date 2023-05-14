@@ -4,9 +4,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import Typography from "src/components/UI/Typography";
 import AuthThumbnail from "src/components/UI/AuthThumbnail";
 import GoogleAuth from "src/components/Auth/GoogleAuth";
-import Button from "src/components/UI/Button";
 import { LoginSchema } from "src/schemas/auth";
-import { displayErrorMessage, checkSubmitDisabled } from "src/utils/validation";
+import { displayErrorMessage } from "src/utils/validation";
 import {
   Container,
   FormContainer,
@@ -17,31 +16,36 @@ import {
   PasswordRow,
   LoginInput,
   ControlsRow,
+  Submit,
 } from "./Login.styled";
 import { useTranslation } from "react-i18next";
 import AuthRedirect from "src/components/Auth/Redirect";
 
+interface LoginFormData {
+  email: string;
+  password: string;
+}
+
 const Login = () => {
   const {
     control,
-    formState: { errors, dirtyFields },
+    formState: { errors },
+    getValues,
+    handleSubmit,
   } = useForm({
     resolver: yupResolver(LoginSchema),
     defaultValues: {
       email: "",
       password: "",
     },
-    mode: "all",
+    mode: "onSubmit",
   });
   const { t } = useTranslation();
   const [showPassword, setShowPassword] = useState<boolean>(false);
 
   const togglePassword = () => setShowPassword(!showPassword);
 
-  const submitDisabled = checkSubmitDisabled(errors, dirtyFields, [
-    "email",
-    "password",
-  ]);
+  const onSubmit = (data: LoginFormData) => console.log(data);
 
   return (
     <Container>
@@ -64,10 +68,11 @@ const Login = () => {
               <Controller
                 name="email"
                 control={control}
-                render={({ field: { onChange } }) => (
+                render={({ field: { onChange, value } }) => (
                   <LoginInput
                     id="email"
                     type="email"
+                    value={value}
                     onChange={onChange}
                     placeholder={t("auth.inputs.email.placeholder") as string}
                     errorMessage={displayErrorMessage(errors?.email)}
@@ -106,15 +111,11 @@ const Login = () => {
             </Label>
           </LoginForm>
           <ControlsRow>
-            <Button disabled={submitDisabled}>
-              <Typography
-                size="m"
-                weight="700"
-                color={submitDisabled ? "lightGrey" : "white"}
-              >
+            <Submit onClick={handleSubmit(onSubmit)}>
+              <Typography size="m" weight="700" color={"white"}>
                 {t("auth.login.submit")}
               </Typography>
-            </Button>
+            </Submit>
             <GoogleAuth mode="login" />
           </ControlsRow>
         </FormContainer>
