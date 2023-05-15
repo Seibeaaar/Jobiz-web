@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import Typography from "./Typography";
-import AuthImage from "src/assets/images/Auth.png";
-import Logo from "src/assets/images/Logo.png";
+import AuthImage from "src/assets/images/Auth.webp";
+import Logo from "src/assets/images/Logo.webp";
 import { useTranslation } from "react-i18next";
 
 const Background = styled.div`

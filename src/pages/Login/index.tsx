@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Typography from "src/components/UI/Typography";
 import AuthThumbnail from "src/components/UI/AuthThumbnail";
 import GoogleAuth from "src/components/Auth/GoogleAuth";
 import { LoginSchema } from "src/schemas/auth";
 import { displayErrorMessage } from "src/utils/validation";
+import { AppDispatch } from "src/redux/store";
+import { login } from "src/redux/thunks/users";
 import {
   Container,
   FormContainer,
@@ -30,7 +33,6 @@ const Login = () => {
   const {
     control,
     formState: { errors },
-    getValues,
     handleSubmit,
   } = useForm({
     resolver: yupResolver(LoginSchema),
@@ -42,10 +44,13 @@ const Login = () => {
   });
   const { t } = useTranslation();
   const [showPassword, setShowPassword] = useState<boolean>(false);
-
+  const dispatch = useDispatch<AppDispatch>();
+  const { error } = useSelector((state: any) => state.user);
   const togglePassword = () => setShowPassword(!showPassword);
 
-  const onSubmit = (data: LoginFormData) => console.log(data);
+  const onSubmit = (data: LoginFormData) => {
+    dispatch(login(data));
+  };
 
   return (
     <Container>
@@ -75,7 +80,7 @@ const Login = () => {
                     value={value}
                     onChange={onChange}
                     placeholder={t("auth.inputs.email.placeholder") as string}
-                    errorMessage={displayErrorMessage(errors?.email)}
+                    errorMessage={displayErrorMessage(errors?.email) || error}
                   />
                 )}
               />
@@ -101,7 +106,9 @@ const Login = () => {
                     type={showPassword ? "text" : "password"}
                     onSecurePress={togglePassword}
                     secure
-                    errorMessage={displayErrorMessage(errors?.password)}
+                    errorMessage={
+                      displayErrorMessage(errors?.password) || error
+                    }
                     placeholder={
                       t("auth.inputs.password.placeholder") as string
                     }

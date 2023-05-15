@@ -52,6 +52,11 @@ export default {
       info: "so we can send you a restoration link",
       submit: "Send a reset link",
     },
+    errors: {
+      general: "Something went wrong",
+      notFound: "No user found with such credentials",
+      alreadyUsed: "Email already in use",
+    },
   },
   general: {
     with: "with",

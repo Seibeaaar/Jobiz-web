@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch } from "src/redux/store";
+import { signUp } from "src/redux/thunks/users";
 import Typography from "src/components/UI/Typography";
 import AuthThumbnail from "src/components/UI/AuthThumbnail";
 import GoogleAuth from "src/components/Auth/GoogleAuth";
@@ -43,10 +46,12 @@ const SignUp = () => {
   });
   const { t } = useTranslation();
   const [showPassword, setShowPassword] = useState<boolean>(false);
+  const dispatch = useDispatch<AppDispatch>();
+  const { error } = useSelector((state: any) => state.user);
 
   const togglePassword = () => setShowPassword(!showPassword);
 
-  const onSubmit = (data: SignUpFormData) => console.log(data);
+  const onSubmit = (data: SignUpFormData) => dispatch(signUp(data));
 
   return (
     <Container>
@@ -115,7 +120,7 @@ const SignUp = () => {
                     type="email"
                     onChange={onChange}
                     placeholder={t("auth.inputs.email.placeholder") as string}
-                    errorMessage={displayErrorMessage(errors?.email)}
+                    errorMessage={displayErrorMessage(errors?.email) || error}
                   />
                 )}
               />
