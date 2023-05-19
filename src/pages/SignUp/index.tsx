@@ -9,6 +9,8 @@ import AuthThumbnail from "src/components/UI/AuthThumbnail";
 import GoogleAuth from "src/components/Auth/GoogleAuth";
 import { SignUpSchema } from "src/schemas/auth";
 import { displayErrorMessage } from "src/utils/validation";
+import { languages } from "src/localization/constants";
+import useLanguage from "src/hooks/useLanguage";
 import {
   Container,
   FormContainer,
@@ -18,6 +20,7 @@ import {
   LoginInput,
   ControlsRow,
   Submit,
+  LanguageSelect,
 } from "./SignUp.styled";
 import { useTranslation } from "react-i18next";
 import AuthRedirect from "src/components/Auth/Redirect";
@@ -45,6 +48,7 @@ const SignUp = () => {
     mode: "onSubmit",
   });
   const { t } = useTranslation();
+  const { language, updateLanguage } = useLanguage();
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const dispatch = useDispatch<AppDispatch>();
   const { error } = useSelector((state: any) => state.user);
@@ -57,6 +61,11 @@ const SignUp = () => {
     <Container>
       <AuthThumbnail />
       <Content>
+        <LanguageSelect
+          value={language}
+          options={languages}
+          onChange={(v) => updateLanguage(v as string)}
+        />
         <FormContainer>
           <Typography as="h2" size="xl" weight="700">
             {t("auth.signUp.title")}

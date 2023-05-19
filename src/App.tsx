@@ -6,8 +6,10 @@ import { RouterProvider } from "react-router-dom";
 import store from "./redux/store";
 import router from "./router";
 import AuthProvider from "./firebase/auth";
+import useLanguage from "./hooks/useLanguage";
 
 const App = () => {
+  useLanguage();
   return (
     <Provider store={store}>
       <AuthProvider>

@@ -6,6 +6,7 @@ import Typography from "src/components/UI/Typography";
 import AuthThumbnail from "src/components/UI/AuthThumbnail";
 import GoogleAuth from "src/components/Auth/GoogleAuth";
 import { LoginSchema } from "src/schemas/auth";
+import useLanguage from "src/hooks/useLanguage";
 import { displayErrorMessage } from "src/utils/validation";
 import { AppDispatch } from "src/redux/store";
 import { login } from "src/redux/thunks/users";
@@ -20,9 +21,11 @@ import {
   LoginInput,
   ControlsRow,
   Submit,
+  LanguageSelect,
 } from "./Login.styled";
 import { useTranslation } from "react-i18next";
 import AuthRedirect from "src/components/Auth/Redirect";
+import { languages } from "src/localization/constants";
 
 interface LoginFormData {
   email: string;
@@ -42,6 +45,7 @@ const Login = () => {
     },
     mode: "onSubmit",
   });
+  const { language, updateLanguage } = useLanguage();
   const { t } = useTranslation();
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const dispatch = useDispatch<AppDispatch>();
@@ -56,6 +60,11 @@ const Login = () => {
     <Container>
       <AuthThumbnail />
       <Content>
+        <LanguageSelect
+          value={language}
+          onChange={(v) => updateLanguage(v as string)}
+          options={languages}
+        />
         <FormContainer>
           <Typography as="h2" size="xl" weight="700">
             {t("auth.login.title")}

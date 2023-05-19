@@ -11,11 +11,18 @@ const Background = styled.div`
   flex-direction: column;
   align-items: center;
   height: 100%;
-  justify-content: flex-end;
+  justify-content: space-between;
   width: 40%;
   @media (max-width: 768px) {
     display: none;
   }
+`;
+
+const LogoContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 50px;
 `;
 
 const StyledLogo = styled.img`
@@ -43,13 +50,15 @@ const AuthThumbnail = () => {
   const { t } = useTranslation();
   return (
     <Background>
-      <StyledLogo src={Logo} alt="Logo" />
-      <Header as="h1" size="xxl" weight="700">
-        {t("auth.thumbnail.title")}
-      </Header>
-      <Info as="h3" size="l">
-        {t("auth.thumbnail.info")}
-      </Info>
+      <LogoContainer>
+        <StyledLogo src={Logo} alt="Logo" />
+        <Header as="h1" size="xxl" weight="700">
+          {t("auth.thumbnail.title")}
+        </Header>
+        <Info as="h3" size="l">
+          {t("auth.thumbnail.info")}
+        </Info>
+      </LogoContainer>
       <Thumbnail src={AuthImage} alt="Woman with todo list" />
     </Background>
   );

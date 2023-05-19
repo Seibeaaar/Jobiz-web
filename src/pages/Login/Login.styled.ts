@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { Select } from "antd";
 import Button from "src/components/UI/Button";
 import Input from "src/components/Form/Input";
 
@@ -8,6 +9,7 @@ export const Container = styled.main`
   height: 100vh;
   display: flex;
   align-items: center;
+  overflow: hidden;
 `;
 
 export const FormContainer = styled.div`
@@ -15,16 +17,15 @@ export const FormContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  @media (max-width: 768px) {
-    flex-grow: 0.5;
-  }
 `;
 
 export const Content = styled.section`
+  width: 100%;
+  height: 100vh;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  flex-grow: 1;
 `;
 
 const Row = styled.div`
@@ -67,5 +68,14 @@ export const ControlsRow = styled(Row)`
 export const Submit = styled(Button)`
   @media (max-width: 576px) {
     width: 100%;
+  }
+`;
+
+export const LanguageSelect = styled(Select)`
+  position: absolute;
+  top: 50px;
+  right: 24px;
+  @media (max-width: 576px) {
+    display: none;
   }
 `;
