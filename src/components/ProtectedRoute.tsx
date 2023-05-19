@@ -1,13 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Navigate } from "react-router-dom";
-import { auth } from "src/firebase";
+import { AuthContext } from "src/firebase/auth";
 
 interface IProtectedRouteProps {
   children: React.ReactNode;
 }
 
 const ProtectedRoute: React.FC<IProtectedRouteProps> = ({ children }) => {
-  if (!auth.currentUser) {
+  const { user } = useContext(AuthContext);
+  if (!user) {
     return <Navigate to="/login" />;
   }
   return <>{children}</>;

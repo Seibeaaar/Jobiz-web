@@ -1,13 +1,11 @@
 import React from "react";
 import styled from "styled-components";
+import { useDispatch } from "react-redux";
 import Typography from "../UI/Typography";
+import { AppDispatch } from "src/redux/store";
+import { authViaGoogle } from "src/redux/thunks/users";
 import GoogleLogo from "src/assets/icons/google.svg";
 import { useTranslation } from "react-i18next";
-import { auth } from "src/firebase";
-
-import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-
-const provider = new GoogleAuthProvider();
 
 interface IGoogleAuthProps {
   mode: "login" | "signUp";
@@ -34,30 +32,9 @@ const GoogleButton = styled.button`
 
 const GoogleAuth: React.FC<IGoogleAuthProps> = ({ mode }) => {
   const { t } = useTranslation();
+  const dispatch = useDispatch<AppDispatch>();
 
-  const onPress = () =>
-    signInWithPopup(auth, provider)
-      .then((result) => {
-        // This gives you a Google Access Token. You can use it to access the Google API.
-        const credential = GoogleAuthProvider.credentialFromResult(result);
-        const token = credential?.accessToken;
-        // The signed-in user info.
-        const user = result.user;
-        // IdP data available using getAdditionalUserInfo(result)
-        // ...
-        console.log(user);
-      })
-      .catch((error) => {
-        // Handle Errors here.
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        // The email of the user's account used.
-        const email = error.customData.email;
-        // The AuthCredential type that was used.
-        const credential = GoogleAuthProvider.credentialFromError(error);
-        // ...
-        console.log(error);
-      });
+  const onPress = () => dispatch(authViaGoogle());
   return (
     <GoogleButton onClick={onPress}>
       <img src={GoogleLogo} alt="Google logo" />

@@ -4,6 +4,7 @@ import Login from "src/pages/Login";
 import SignUp from "src/pages/SignUp";
 import ForgotPassword from "src/pages/ForgotPassword";
 import ProtectedRoute from "src/components/ProtectedRoute";
+import Onboarding from "src/pages/Onboarding";
 
 const router = createBrowserRouter([
   {
@@ -13,6 +14,10 @@ const router = createBrowserRouter([
         <div>Home</div>
       </ProtectedRoute>
     ),
+  },
+  {
+    path: "/onboarding",
+    element: <Onboarding />,
   },
   {
     path: "/login",

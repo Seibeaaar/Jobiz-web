@@ -58,7 +58,50 @@ export default {
       alreadyUsed: "Email already in use",
     },
   },
+  onboarding: {
+    title: "Setup your account",
+    info: "Complete the questionnaire, you can update that data later in settings",
+    profileType: {
+      header: "Select your profile type",
+      employer: {
+        type: "Employer",
+        info: "You want to find a suitable candidate for your project/position",
+      },
+      employee: {
+        type: "Employee",
+        info: "Your goal is to find a perfect job and career opportunities",
+      },
+    },
+    employee: {
+      locationType: "Select your preferred work location",
+      jobType: "What types of job you're looking for?",
+      jobCategory: "You're specialized in:",
+    },
+    employer: {
+      type: "Which type of employer are you?",
+      company: {
+        title: "Please select your company",
+        position: "What is your position in this company?",
+        question: "Haven't found your company?",
+        redirect: "You can create a brand new company profile",
+      },
+    },
+    createCompany: {
+      title: "Create a company profile",
+      name: {
+        label: "Company name",
+        placeholder: "Enter company name",
+      },
+      employees: {
+        label: "How big is your company?",
+      },
+      logo: {
+        label: "Upload your company logo here",
+      },
+    },
+  },
   general: {
     with: "with",
+    confirm: "Confirm",
   },
 };
