@@ -14,7 +14,6 @@ import {
   Container,
   FormContainer,
   Content,
-  RedirectLink,
   LoginForm,
   Label,
   PasswordRow,
@@ -24,6 +23,7 @@ import {
   LanguageSelect,
 } from "./Login.styled";
 import { useTranslation } from "react-i18next";
+import ForgotPassword from "./components/ForgotPassword";
 import AuthRedirect from "src/components/Auth/Redirect";
 import { languages } from "src/localization/constants";
 
@@ -48,9 +48,12 @@ const Login = () => {
   const { language, updateLanguage } = useLanguage();
   const { t } = useTranslation();
   const [showPassword, setShowPassword] = useState<boolean>(false);
+  const [resetPassword, setResetPassword] = useState<boolean>(false);
   const dispatch = useDispatch<AppDispatch>();
   const { error } = useSelector((state: any) => state.user);
   const togglePassword = () => setShowPassword(!showPassword);
+
+  const closeResetPassword = () => setResetPassword(false);
 
   const onSubmit = (data: LoginFormData) => {
     dispatch(login(data));
@@ -59,6 +62,7 @@ const Login = () => {
   return (
     <Container>
       <AuthThumbnail />
+      <ForgotPassword visible={resetPassword} closeModal={closeResetPassword} />
       <Content>
         <LanguageSelect
           value={language}
@@ -99,11 +103,14 @@ const Login = () => {
                 <Typography size="s" weight="700">
                   {t("auth.inputs.password.label")}
                 </Typography>
-                <RedirectLink to="/restorePassword">
-                  <Typography color="primary" size="s" weight="700">
-                    {t("auth.login.forgotPassword")}
-                  </Typography>
-                </RedirectLink>
+                <Typography
+                  onClick={() => setResetPassword(true)}
+                  color="primary"
+                  size="s"
+                  weight="700"
+                >
+                  {t("auth.login.forgotPassword")}
+                </Typography>
               </PasswordRow>
               <Controller
                 name="password"
